@@ -10,11 +10,11 @@ const row_b = ['A8', 'B8', 'C8', 'D8', 'E8', 'F8', 'G8', 'H8',
 'A7', 'B7', 'C7', 'D7', 'E7', 'F7', 'G7', 'H7']
 
 const pieces_w = ['pieces/w/rook.png', 'pieces/w/knight.png', 
-'pieces/w/bishop.png', 'pieces/w/king.png', 'pieces/w/queen.png', 'pieces/w/bishop.png', 
+'pieces/w/bishop.png', 'pieces/w/queen.png', 'pieces/w/king.png', 'pieces/w/bishop.png', 
 'pieces/w/knight.png', 'pieces/w/rook.png', 'pieces/w/pawn.png'];
 
 const pieces_b = ['pieces/b/rook_b.png', 'pieces/b/knight_b.png', 
-'pieces/b/bishop_b.png', 'pieces/b/king_b.png', 'pieces/b/queen_b.png', 'pieces/b/bishop_b.png', 
+'pieces/b/bishop_b.png', 'pieces/b/queen_b.png', 'pieces/b/king_b.png', 'pieces/b/bishop_b.png', 
 'pieces/b/knight_b.png', 'pieces/b/rook_b.png', 'pieces/b/pawn_b.png'];
  
 playground()
@@ -52,15 +52,17 @@ function setPieces(terr, spot) {
     const arr_pieces = [row_w, row_b]
     for (let x = 0; x < arr_pieces.length; x++) {
         for (let i = 0; i < 16; i++) {
-            if (i < 16) {
                 const onBoardPiece = document.querySelector(`.${arr_pieces[x][i]}`)
                 let indexOfPiece;
                 i >= 8 ?indexOfPiece = 8:indexOfPiece = i;
                 const img = document.createElement('img')
                 img.classList.add('piece')
                 img.src = x == 0 ? pieces_w[indexOfPiece]:pieces_b[indexOfPiece]
-                onBoardPiece.append(img)
-            }   
+                let val_class = img.src.split('/pieces/')[1];
+                let piece_id = val_class.slice(2, val_class.length - 4)
+                console.log(piece_id);
+                img.classList.add(piece_id);
+                onBoardPiece.append(img) 
         }
     } 
             const all_pieces = document.querySelectorAll('.piece');  
